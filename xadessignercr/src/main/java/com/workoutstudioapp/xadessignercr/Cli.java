@@ -16,7 +16,7 @@ public class Cli {
 		String password = null;
                 
 		
-		if (args.length != 5) {
+		if (args.length != 6) {
 			showUsage();
 			System.exit(-1);
 		}
@@ -55,8 +55,8 @@ public class Cli {
 	}
 	public static void showUsage() {
 		System.out.println("Usage:");
-		System.out.println("java -jar xades-signer-cr sign <keyPath> <keyPassword> <xmlInPath> <xmlOutPath>");
-		System.out.println("java -jar xades-signer-cr send <endPoint> <xmlPath> <username> <password>");
-		System.out.println("java -jar xades-signer-cr query <endPoint> <xmlPath> <username> <password>");
+		System.out.println("java -jar xades-signer-cr sign <keyPath> <keyPassword> <xmlInPath> <xmlOutPath> <type>");
+		System.out.println("java -jar xades-signer-cr send <endPoint> <xmlPath> <username> <password> <type>");
+		System.out.println("java -jar xades-signer-cr query <endPoint> <xmlPath> <username> <password> <type>");
 	}
 }
