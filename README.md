@@ -5,9 +5,9 @@ En la carpeta https://github.com/johann04/xades-signer-cr/tree/master/xadessigne
 
 ```
 Usage:
-java -jar xades-signer-cr sign <keyPath> <keyPassword> <xmlInPath> <xmlOutPath>
-java -jar xades-signer-cr send <endPoint> <xmlPath> <username> <password>
-java -jar xades-signer-cr query <endPoint> <xmlPath> <username> <password>
+java -jar xades-signer-cr sign <keyPath> <keyPassword> <xmlInPath> <xmlOutPath> <type>
+java -jar xades-signer-cr send <endPoint> <xmlPath> <username> <password> <type>
+java -jar xades-signer-cr query <endPoint> <xmlPath> <username> <password> <type>
 ```
 
 **sign** firma el xml.
@@ -25,5 +25,7 @@ java -jar xades-signer-cr query <endPoint> <xmlPath> <username> <password>
 **<username>** Nombre de usuario generado en ATV.
 
 **<password>** Password generado en ATV.
-
+  
+**<type>** Tipo de documento -> FacturaElectronica | NotaCreditoElectronica | TiqueteElectronico | NotaDebitoElectronica
+  
 Este proyecto iba a ser utilizado en la implementación de firma digital de mi proyecto https://www.facebook.com/workoutstudioapp pero finalmente no lo utilicé... si le pareció útil siempre me puede colaborar con un like.
