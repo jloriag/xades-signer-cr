@@ -27,14 +27,14 @@ import xades4j.providers.SignaturePolicyInfoProvider;
 import xades4j.providers.impl.FileSystemKeyStoreKeyingDataProvider;
 
 public class Signer {
-	public void sign(String keyPath, String password, String xmlInPath, String xmlOutPath) {
+	public void sign(String keyPath, String password, String xmlInPath, String xmlOutPath,final String tipo) {
 		KeyingDataProvider kp;
 try {
             
             SignaturePolicyInfoProvider policyInfoProvider = new SignaturePolicyInfoProvider() {
                 public SignaturePolicyBase getSignaturePolicy() {
                     return new SignaturePolicyIdentifierProperty(
-                            new ObjectIdentifier("https://tribunet.hacienda.go.cr/docs/esquemas/2017/v4.2/facturaElectronica"),
+                            new ObjectIdentifier("https://tribunet.hacienda.go.cr/docs/esquemas/2017/v4.2/"+tipo),
                             new ByteArrayInputStream("Politica de Factura Digital".getBytes()));
                 }
             };

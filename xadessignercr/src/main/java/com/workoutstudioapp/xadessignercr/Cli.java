@@ -3,6 +3,7 @@ package com.workoutstudioapp.xadessignercr;
 public class Cli {
 	public static void main(String[] args) {
 		String action = null;
+                String tipo=null;
 		// sign
 		String keyPath = null;
 		String keyPassword = null;
@@ -13,19 +14,22 @@ public class Cli {
 		String xmlPath = null;
 		String username = null;
 		String password = null;
+                
 		
 		if (args.length != 5) {
 			showUsage();
 			System.exit(-1);
 		}
 		action = args[0];
+                tipo= args[5];
 		if ("sign".equals(action)) {
 			keyPath = args[1];
 			keyPassword = args[2];
 			xmlInPath = args[3];
 			xmlOutPath = args[4];
+                        
 			Signer signer = new Signer();
-			signer.sign(keyPath, keyPassword, xmlInPath, xmlOutPath);
+			signer.sign(keyPath, keyPassword, xmlInPath, xmlOutPath,tipo);
 			System.exit(0);
 		} else if ("send".equals(action)) {
 			endPoint = args[1];
@@ -33,7 +37,7 @@ public class Cli {
 			username = args[3];
 			password = args[4];
 			Sender sender = new Sender();
-			sender.send(endPoint, xmlPath, username, password);
+			sender.send(endPoint, xmlPath, username, password,tipo);
 			System.exit(0);
 		} else if ("query".equals(action)) {
 			endPoint = args[1];
@@ -41,7 +45,7 @@ public class Cli {
 			username = args[3];
 			password = args[4];
 			Sender sender = new Sender();
-			sender.query(endPoint, xmlPath, username, password);
+			sender.query(endPoint, xmlPath, username, password,tipo);
 			System.exit(0);
 		} else {
 			showUsage();

@@ -65,7 +65,7 @@ public class Sender {
 	    token = (String) res.get("access_token");
 		return token;
 	}
-	public void send(String endpoint, String xmlPath, String username, String password) {
+	public void send(String endpoint, String xmlPath, String username, String password,final String tipo) {
 		try {			
 			XPath xPath = XPathFactory.newInstance().newXPath();
 			File file = new File(xmlPath);
@@ -75,9 +75,9 @@ public class Sender {
 			comprobanteElectronico.setComprobanteXml(base64);
 
 			Document xml = XmlHelper.getDocument(xmlPath);
-			NodeList nodes = (NodeList) xPath.evaluate("/NotaCreditoElectronica/Clave", xml.getDocumentElement(), XPathConstants.NODESET);
+			NodeList nodes = (NodeList) xPath.evaluate("/"+tipo+"/Clave", xml.getDocumentElement(), XPathConstants.NODESET);
 			comprobanteElectronico.setClave(nodes.item(0).getTextContent());
-			nodes = (NodeList) xPath.evaluate("/NotaCreditoElectronica/FechaEmision", xml.getDocumentElement(), XPathConstants.NODESET);
+			nodes = (NodeList) xPath.evaluate("/"+tipo+"/FechaEmision", xml.getDocumentElement(), XPathConstants.NODESET);
 			//comprobanteElectronico.setFecha(nodes.item(0).getTextContent());
 
 			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
@@ -85,14 +85,14 @@ public class Sender {
 			
 			ObligadoTributario receptor = new ObligadoTributario();
 			ObligadoTributario emisor = new ObligadoTributario();
-			nodes = (NodeList) xPath.evaluate("/NotaCreditoElectronica/Emisor/Identificacion/Tipo", xml.getDocumentElement(), XPathConstants.NODESET);
+			nodes = (NodeList) xPath.evaluate("/"+tipo+"/Emisor/Identificacion/Tipo", xml.getDocumentElement(), XPathConstants.NODESET);
 			emisor.setTipoIdentificacion(nodes.item(0).getTextContent());
-			nodes = (NodeList) xPath.evaluate("/NotaCreditoElectronica/Emisor/Identificacion/Numero", xml.getDocumentElement(), XPathConstants.NODESET);
+			nodes = (NodeList) xPath.evaluate("/"+tipo+"/Emisor/Identificacion/Numero", xml.getDocumentElement(), XPathConstants.NODESET);
 			emisor.setNumeroIdentificacion(nodes.item(0).getTextContent());
 			
-			nodes = (NodeList) xPath.evaluate("/NotaCreditoElectronica/Receptor/Identificacion/Tipo", xml.getDocumentElement(), XPathConstants.NODESET);
+			nodes = (NodeList) xPath.evaluate("/"+tipo+"/Receptor/Identificacion/Tipo", xml.getDocumentElement(), XPathConstants.NODESET);
 			receptor.setTipoIdentificacion(nodes.item(0).getTextContent());
-			nodes = (NodeList) xPath.evaluate("/NotaCreditoElectronica/Receptor/Identificacion/Numero", xml.getDocumentElement(), XPathConstants.NODESET);
+			nodes = (NodeList) xPath.evaluate("/"+tipo+"/Receptor/Identificacion/Numero", xml.getDocumentElement(), XPathConstants.NODESET);
 			receptor.setNumeroIdentificacion(nodes.item(0).getTextContent());
 
 			comprobanteElectronico.setReceptor(receptor);
@@ -124,12 +124,12 @@ public class Sender {
 		}
 	}
 
-	public void query(String endpoint, String xmlPath, String username, String password) {
+	public void query(String endpoint, String xmlPath, String username, String password,final String tipo) {
 		try {
 			XPath xPath = XPathFactory.newInstance().newXPath();
 			Document xml = XmlHelper.getDocument(xmlPath);
 			
-			NodeList nodes = (NodeList) xPath.evaluate("/NotaCreditoElectronica/Clave", xml.getDocumentElement(), XPathConstants.NODESET);
+			NodeList nodes = (NodeList) xPath.evaluate("/"+tipo+"/Clave", xml.getDocumentElement(), XPathConstants.NODESET);
 			String clave = nodes.item(0).getTextContent();
 
 			String url = endpoint + "/recepcion/" + clave;
