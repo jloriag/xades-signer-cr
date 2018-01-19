@@ -26,10 +26,11 @@ public class Cli {
 			keyPath = args[1];
 			keyPassword = args[2];
 			xmlInPath = args[3];
-			xmlOutPath = args[4];
-                        
+			xmlOutPath = args[4];     
 			Signer signer = new Signer();
-			signer.sign(keyPath, keyPassword, xmlInPath, xmlOutPath,tipo);
+                        String letra =tipo.substring(0,1).toLowerCase(); 
+                        String nuevoString=letra+tipo.substring(1,tipo.length());
+			signer.sign(keyPath, keyPassword, xmlInPath, xmlOutPath,nuevoString);
 			System.exit(0);
 		} else if ("send".equals(action)) {
 			endPoint = args[1];
